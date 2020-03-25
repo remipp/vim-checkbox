@@ -73,7 +73,20 @@ fu! checkbox#ToggleCB()
 		endfor
 	else
 		if g:insert_checkbox != ''
-			let line = substitute(line, g:insert_checkbox, g:insert_checkbox_prefix . '[' . g:checkbox_states[0] . ']' . g:insert_checkbox_suffix, '')
+			if g:insert_checkbox == '\<'
+				let col = matchstrpos(line, g:insert_checkbox)[1]
+				while col >= 0
+					if(line[col-1] == '*')
+						let col = col-1
+						echo col
+					else
+						break
+					endif
+				endwhile
+				let line = strpart(line, 0, col) . g:insert_checkbox_prefix . '[' . g:checkbox_states[0] . ']' . g:insert_checkbox_suffix . strpart(line, col)
+			else
+				let line = substitute(line, g:insert_checkbox, g:insert_checkbox_prefix . '[' . g:checkbox_states[0] . ']' . g:insert_checkbox_suffix, '')
+			endif
 		endif
 	endif
 
