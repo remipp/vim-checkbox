@@ -78,7 +78,6 @@ fu! checkbox#ToggleCB()
 				while col >= 0
 					if(line[col-1] == '*')
 						let col = col-1
-						echo col
 					else
 						break
 					endif
