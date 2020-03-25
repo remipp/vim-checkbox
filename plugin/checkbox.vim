@@ -93,5 +93,6 @@ fu! checkbox#ToggleCB()
 endf
 
 command! ToggleCB call checkbox#ToggleCB()
+command! DeleteCB call setline('.', substitute(getline('.'), g:insert_checkbox_prefix . '\[.\]' . g:insert_checkbox_suffix, '', ''))
 
 let g:loaded_checkbox = 1
